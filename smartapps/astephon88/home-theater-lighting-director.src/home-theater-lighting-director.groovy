@@ -122,12 +122,13 @@ def kodiStatusChangedHandler(evt){
         	break
         case "stopped":
        		if (state.lightControlActive){
-               	if (light.hasCapability("Switch Level")){
-               		light.setLevel(state.initialLightLevel)
-               	}
                	switch (state.initialLightSetting){
                	case "on":
-               		light.on()
+               		if (light.hasCapability("Switch Level")){
+                    	light.setLevel(state.initialLightLevel)
+                    }
+                    else
+                    	light.on()
                    	break
                	case "off":
                		light.off()
